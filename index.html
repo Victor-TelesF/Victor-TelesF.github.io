@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victor Teles — Engenharia de Dados</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root{
+    --bg:            #0F1115;
+    --surface:       #171A21;
+    --surface-alt:   #1D212B;
+    --border:        #2A2E38;
+    --text:          #ECEAE4;
+    --text-muted:    #8B92A6;
+    --text-dim:      #565D6E;
+    --amber:         #E3A34D;
+    --amber-dim:     #8A6A3A;
+    --teal:          #5FA8A0;
+    --rose:          #C1666B;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--amber); color:var(--bg); }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,17,21,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .nav-brand{
+    font-family:var(--font-mono); font-size:14px; font-weight:600;
+    color:var(--amber);
+  }
+  .nav-brand span{ color:var(--text-dim); }
+  .nav-links{ display:flex; gap:26px; font-family:var(--font-mono); font-size:12.5px; }
+  .nav-links a{ color:var(--text-muted); transition:color .2s; }
+  .nav-links a:hover{ color:var(--amber); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 76px;
+    border-bottom:1px solid var(--border);
+  }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
+    letter-spacing:.03em; margin-bottom:22px; display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{ content:'//'; color:var(--amber-dim); }
+
+  .schema{
+    font-family:var(--font-mono);
+    font-size:14.5px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-left:3px solid var(--amber);
+    border-radius:6px;
+    padding:26px 28px;
+    overflow-x:auto;
+    white-space:pre;
+    color:var(--text-muted);
+  }
+  .schema .kw{ color:var(--rose); }
+  .schema .tbl{ color:var(--text); }
+  .schema .field{ color:var(--teal); }
+  .schema .type{ color:var(--text-dim); }
+  .schema .val{ color:var(--amber); }
+  .cursor{
+    display:inline-block; width:8px; height:16px; background:var(--amber);
+    margin-left:2px; vertical-align:-3px;
+    animation:blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-tagline{
+    margin-top:30px;
+    font-size:19px;
+    color:var(--text);
+    max-width:640px;
+  }
+  .hero-tagline strong{ color:var(--amber); font-weight:600; }
+
+  .hero-cta{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--font-mono); font-size:13px;
+    padding:11px 20px; border-radius:6px;
+    border:1px solid var(--border);
+    transition:all .18s;
+  }
+  .btn-primary{ background:var(--amber); color:var(--bg); border-color:var(--amber); font-weight:600; }
+  .btn-primary:hover{ background:#f0b366; }
+  .btn-ghost{ color:var(--text-muted); }
+  .btn-ghost:hover{ color:var(--text); border-color:var(--text-muted); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:74px 0; border-bottom:1px solid var(--border); }
+  section:last-of-type{ border-bottom:none; }
+  .filename{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim);
+    margin-bottom:20px; display:flex; align-items:center; gap:10px;
+  }
+  .filename .dot{ width:7px; height:7px; border-radius:50%; background:var(--amber-dim); }
+  h2{
+    font-family:var(--font-mono);
+    font-size:26px;
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:32px;
+    letter-spacing:-.01em;
+  }
+  h2 .accent{ color:var(--amber); }
+
+  /* ---------- SOBRE (placeholder) ---------- */
+  .todo-box{
+    background:var(--surface);
+    border:1px dashed var(--amber-dim);
+    border-radius:8px;
+    padding:26px 28px;
+    font-family:var(--font-mono);
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.85;
+  }
+  .todo-box .comment{ color:var(--text-dim); }
+  .todo-box .tag{
+    display:inline-block; font-family:var(--font-mono); font-size:11px;
+    background:rgba(227,163,77,0.12); color:var(--amber);
+    border:1px solid var(--amber-dim); border-radius:4px;
+    padding:2px 8px; margin-bottom:14px;
+  }
+
+  /* ---------- STACK ---------- */
+  .yaml{
+    font-family:var(--font-mono); font-size:14px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:8px; padding:28px 30px;
+  }
+  .yaml-row{ margin-bottom:16px; }
+  .yaml-row:last-child{ margin-bottom:0; }
+  .yaml-key{ color:var(--teal); }
+  .yaml-list{ color:var(--text); }
+  .yaml-list .item{ color:var(--text-muted); }
+  .yaml-list .item::after{ content:','; color:var(--text-dim); }
+  .yaml-list .item:last-child::after{ content:''; }
+  .badge-inline{
+    display:inline-block; padding:1px 8px; margin:2px 4px 2px 0;
+    background:var(--surface-alt); border:1px solid var(--border); border-radius:4px;
+    font-size:12.5px; color:var(--text);
+  }
+
+  /* ---------- PROJETOS ---------- */
+  .proj-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .card{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:8px; padding:24px; transition:transform .18s, border-color .18s;
+  }
+  .card:hover{ transform:translateY(-3px); border-color:var(--amber-dim); }
+  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
+  .card h3{ font-family:var(--font-mono); font-size:15.5px; color:var(--text); font-weight:600; }
+  .card h3 a:hover{ color:var(--amber); }
+  .lang-badge{
+    font-family:var(--font-mono); font-size:10.5px; color:var(--bg);
+    background:var(--teal); padding:2px 7px; border-radius:3px; white-space:nowrap;
+  }
+  .card p{ font-size:13.5px; color:var(--text-muted); margin-bottom:14px; }
+  .card .link{ font-family:var(--font-mono); font-size:12px; color:var(--amber); }
+  .card.featured{ grid-column:1 / -1; border-left:3px solid var(--teal); }
+  .status-pill{
+    font-family:var(--font-mono); font-size:10.5px; color:var(--teal);
+    border:1px solid var(--teal); border-radius:20px; padding:2px 10px;
+  }
+
+  /* ---------- TRILHA ---------- */
+  .roadmap{ display:flex; flex-direction:column; gap:0; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .rm-row{
+    display:grid; grid-template-columns:1fr 130px 160px;
+    padding:16px 22px; font-size:13.5px; border-bottom:1px solid var(--border);
+    align-items:center; gap:12px;
+  }
+  .rm-row:last-child{ border-bottom:none; }
+  .rm-row.head{ background:var(--surface-alt); font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.05em; }
+  .rm-name{ color:var(--text); font-weight:500; }
+  .rm-name small{ display:block; color:var(--text-muted); font-weight:400; font-size:12px; margin-top:2px; }
+  .status{ font-family:var(--font-mono); font-size:11.5px; padding:3px 9px; border-radius:20px; width:fit-content; }
+  .status.done{ color:var(--teal); border:1px solid var(--teal); }
+  .status.wip{ color:var(--amber); border:1px solid var(--amber); }
+  .status.next{ color:var(--text-dim); border:1px solid var(--border); }
+  .rm-tech{ font-family:var(--font-mono); font-size:12px; color:var(--text-dim); }
+
+  /* ---------- CONTATO ---------- */
+  .terminal{
+    font-family:var(--font-mono); font-size:14px;
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:26px 28px;
+  }
+  .term-line{ margin-bottom:12px; color:var(--text-muted); }
+  .term-line:last-child{ margin-bottom:0; }
+  .term-line .prompt{ color:var(--teal); }
+  .term-line .flag{ color:var(--rose); }
+  .term-line .real{ color:var(--amber); }
+  .term-line a.real:hover{ text-decoration:underline; }
+
+  footer{ padding:36px 0 50px; text-align:center; }
+  footer p{ font-family:var(--font-mono); font-size:12px; color:var(--text-dim); }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width:640px){
+    .hero{ padding:64px 0 52px; }
+    .schema{ font-size:12px; padding:20px 16px; }
+    h2{ font-size:21px; }
+    .proj-grid{ grid-template-columns:1fr; }
+    .rm-row{ grid-template-columns:1fr; gap:6px; }
+    .rm-row.head{ display:none; }
+    .nav-links{ gap:16px; }
+    .hero-tagline{ font-size:16.5px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-brand">victor<span>@</span>portfolio<span>:~$</span></div>
+    <div class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#stack">stack</a>
+      <a href="#projetos">projetos</a>
+      <a href="#trilha">trilha</a>
+      <a href="#contato">contato</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">schema.sql</div>
+    <div class="schema"><span class="kw">CREATE TABLE</span> <span class="tbl">desenvolvedor</span> (
+  <span class="field">nome</span>          <span class="type">VARCHAR</span>   := <span class="val">'Victor Teles'</span>,
+  <span class="field">cargo_alvo</span>    <span class="type">VARCHAR</span>   := <span class="val">'Engenheiro de Dados'</span>,
+  <span class="field">localizacao</span>   <span class="type">VARCHAR</span>   := <span class="val">'Aracaju, SE — Brasil'</span>,
+  <span class="field">status</span>        <span class="type">ENUM</span>      := <span class="val">'em_formacao'</span>,
+  <span class="field">stack_atual</span>   <span class="type">TEXT[]</span>    := <span class="val">['Python','SQL','FastAPI','PostgreSQL']</span>,
+  <span class="field">objetivo</span>      <span class="type">TEXT</span>      := <span class="val">'transformar dados em decisões melhores'</span>
+);<span class="cursor"></span></div>
+
+    <p class="hero-tagline">Do <strong>C/C++</strong> ao <strong>Python</strong>. Da programação competitiva à <strong>engenharia de dados</strong> — construindo, testando e quebrando projetos até entender o porquê de cada peça.</p>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+      <a class="btn btn-ghost" href="https://github.com/Victor4654" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="#contato">Contato</a>
+    </div>
+  </div>
+</header>
+
+<section id="sobre">
+  <div class="wrap reveal">
+    <div class="filename"><span class="dot"></span>sobre.sql</div>
+    <h2>Sobre <span class="accent">mim</span></h2>
+    <div class="todo-box">
+      <span class="tag">✍️ espaço reservado</span><br>
+      <span class="comment">/*</span><br>
+      &nbsp;&nbsp;TODO(Victor): escreva sua história aqui.<br><br>
+      &nbsp;&nbsp;Sugestão de estrutura:<br>
+      &nbsp;&nbsp;— de onde você veio (C/C++, curiosidade por matemática e economia)<br>
+      &nbsp;&nbsp;— o que te aproximou de dados<br>
+      &nbsp;&nbsp;— o que você estuda e constrói hoje<br>
+      &nbsp;&nbsp;— pra onde você quer ir (ML engineering)<br>
+      <span class="comment">*/</span>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap reveal">
+    <div class="filename"><span class="dot"></span>stack.yaml</div>
+    <h2>Stack <span class="accent">técnica</span></h2>
+    <div class="yaml">
+      <div class="yaml-row">
+        <span class="yaml-key">linguagens:</span>
+        <span class="badge-inline">Python</span><span class="badge-inline">SQL</span><span class="badge-inline">C/C++ (base)</span>
+      </div>
+      <div class="yaml-row">
+        <span class="yaml-key">frameworks_e_libs:</span>
+        <span class="badge-inline">FastAPI</span><span class="badge-inline">SQLAlchemy 2.0</span><span class="badge-inline">Pydantic v2</span>
+      </div>
+      <div class="yaml-row">
+        <span class="yaml-key">dados:</span>
+        <span class="badge-inline">PostgreSQL</span><span class="badge-inline">psycopg v3</span>
+      </div>
+      <div class="yaml-row">
+        <span class="yaml-key">ferramentas:</span>
+        <span class="badge-inline">Git</span><span class="badge-inline">Insomnia</span><span class="badge-inline">WSL2 / Linux</span>
+      </div>
+      <div class="yaml-row">
+        <span class="yaml-key">em_estudo:</span>
+        <span class="badge-inline">Ciência de Dados</span><span class="badge-inline">Estatística</span><span class="badge-inline">Data Engineering</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="wrap reveal">
+    <div class="filename"><span class="dot"></span>projetos.md</div>
+    <h2>Projetos em <span class="accent">destaque</span></h2>
+
+    <div class="proj-grid">
+
+      <div class="card featured">
+        <div class="card-top">
+          <h3>FinTrack API</h3>
+          <span class="status-pill">em desenvolvimento</span>
+        </div>
+        <p>REST API para gestão de portfólio de investimentos, construída com FastAPI, SQLAlchemy 2.0, Pydantic v2 e PostgreSQL. Foco atual: camada de domínio — hierarquia de ativos financeiros, padrão Strategy via Protocol para cálculo de rendimentos e uma hierarquia própria de exceções.</p>
+        <span class="link">→ repositório em breve</span>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Victor4654/Alura" target="_blank" rel="noopener">Alura</a></h3>
+          <span class="lang-badge">Python</span>
+        </div>
+        <p>Atividades e projetos da trilha de back-end Python da Alura.</p>
+        <a class="link" href="https://github.com/Victor4654/Alura" target="_blank" rel="noopener">github.com/Victor4654/Alura ↗</a>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Victor4654/Beecrowd" target="_blank" rel="noopener">Beecrowd</a></h3>
+          <span class="lang-badge">Python</span>
+        </div>
+        <p>Soluções de exercícios de programação competitiva, organizadas com README estruturado.</p>
+        <a class="link" href="https://github.com/Victor4654/Beecrowd" target="_blank" rel="noopener">github.com/Victor4654/Beecrowd ↗</a>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Victor4654/Projetos_pessoais_de_aprendizagem" target="_blank" rel="noopener">Projetos pessoais</a></h3>
+          <span class="lang-badge">TS / Py</span>
+        </div>
+        <p>Projetos autorais de aprendizado — do Python básico a experimentos full-stack.</p>
+        <a class="link" href="https://github.com/Victor4654/Projetos_pessoais_de_aprendizagem" target="_blank" rel="noopener">github.com/Victor4654/Projetos_pessoais_de_aprendizagem ↗</a>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <h3><a href="https://github.com/Victor4654/Livros" target="_blank" rel="noopener">Livros</a></h3>
+          <span class="lang-badge">Acervo</span>
+        </div>
+        <p>Repositório de apoio aos estudos — leituras de economia, matemática e engenharia de dados.</p>
+        <a class="link" href="https://github.com/Victor4654/Livros" target="_blank" rel="noopener">github.com/Victor4654/Livros ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="trilha">
+  <div class="wrap reveal">
+    <div class="filename"><span class="dot"></span>trilha.json</div>
+    <h2>Trilha de <span class="accent">formação</span></h2>
+    <div class="roadmap">
+      <div class="rm-row head">
+        <span>Etapa</span><span>Status</span><span>Foco</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-name">Fundamentos de Python<small>OOP, type hints, ambientes virtuais</small></span>
+        <span class="status done">concluído</span>
+        <span class="rm-tech">Alura · projetos próprios</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-name">Back-end Python<small>APIs, ORM, boas práticas</small></span>
+        <span class="status done">concluído</span>
+        <span class="rm-tech">FastAPI · SQLAlchemy</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-name">FinTrack API<small>domínio, Clean Architecture, testes</small></span>
+        <span class="status wip">em andamento</span>
+        <span class="rm-tech">Pydantic v2 · PostgreSQL</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-name">Ciência de Dados<small>estatística, SQL avançado, ferramentas de dados</small></span>
+        <span class="status next">planejado</span>
+        <span class="rm-tech">Alura PRO</span>
+      </div>
+      <div class="rm-row">
+        <span class="rm-name">Engenharia de Dados → ML<small>pipelines, modelagem, produção</small></span>
+        <span class="status next">objetivo</span>
+        <span class="rm-tech">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap reveal">
+    <div class="filename"><span class="dot"></span>contato.sh</div>
+    <h2>Vamos <span class="accent">conversar</span></h2>
+    <div class="terminal">
+      <div class="term-line"><span class="prompt">$</span> github <span class="flag">--open</span> <a class="real" href="https://github.com/Victor4654" target="_blank" rel="noopener">github.com/Victor4654</a></div>
+      <div class="term-line"><span class="prompt">$</span> email <span class="flag">--set</span> "<span class="comment">// adicione seu e-mail aqui</span>"</div>
+      <div class="term-line"><span class="prompt">$</span> linkedin <span class="flag">--set</span> "<span class="comment">// adicione seu perfil aqui</span>"</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>victor teles · construído com dados, café e curiosidade</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

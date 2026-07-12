@@ -1,379 +1,386 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Victor Teles — Desenvolvedor Backend Python</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Teles — Desenvolvedor Backend Python</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-  :root{
-    --bg:            #070914;
-    --surface:       #10132A;
-    --surface-alt:   #161A3A;
-    --border:        #262C52;
-    --text:          #E8EAF8;
-    --text-muted:    #9099C4;
-    --text-dim:      #5B6290;
-    --blue:          #5C9CFF;
-    --blue-dim:      #35508C;
-    --violet:        #9D8CFF;
-    --cyan:          #5EEAD4;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
+    :root {
+      --bg:            #05070a;
+      --surface:       #0d1117;
+      --surface-alt:   #161b22;
+      --border:        #30363d;
+      --text:          #e6edf3;
+      --text-muted:    #8b949e;
+      --text-dim:      #484f58;
+      --blue:          #58a6ff;
+      --blue-dim:      #1f6feb;
+      --violet:        #bc8cff;
+      --cyan:          #39c5bb;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
 
-  body{
-    background:
-      radial-gradient(ellipse 900px 560px at 15% -8%, rgba(92,156,255,0.20), transparent 60%),
-      radial-gradient(ellipse 800px 560px at 92% 10%, rgba(157,140,255,0.16), transparent 62%),
-      radial-gradient(ellipse 700px 500px at 50% 100%, rgba(94,234,212,0.06), transparent 60%),
-      radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1px) 0 0/160px 160px,
-      radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px) 40px 60px/220px 220px,
-      var(--bg);
-    background-attachment: fixed;
-    color:var(--text);
-    font-family:var(--font-sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(31, 111, 235, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(188, 140, 255, 0.1) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  ::selection{ background:var(--blue); color:var(--bg); }
-  a{ color:inherit; text-decoration:none; }
-  .wrap{ max-width:960px; margin:0 auto; padding:0 28px; }
+    ::selection { background: var(--blue-dim); color: #fff; }
+    a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
 
-  nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(7,9,20,0.78);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-  }
-  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:60px; }
-  .nav-brand{ font-family:var(--font-mono); font-size:14px; font-weight:600; color:var(--blue); }
-  .nav-brand span{ color:var(--text-dim); }
-  .nav-links{ display:flex; gap:24px; font-family:var(--font-mono); font-size:12.5px; }
-  .nav-links a{ color:var(--text-muted); transition:color .2s; }
-  .nav-links a:hover{ color:var(--blue); }
+    /* ---------- NAVIGATION ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(5, 7, 10, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-brand { font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--blue); }
+    .nav-brand span { color: var(--text-dim); }
+    .nav-links { display: flex; gap: 32px; font-family: var(--font-mono); font-size: 13px; }
+    .nav-links a { color: var(--text-muted); }
+    .nav-links a:hover { color: var(--blue); }
 
-  /* ---------- HERO ---------- */
-  .hero{ padding:96px 0 76px; border-bottom:1px solid var(--border); }
-  .eyebrow{ font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim); letter-spacing:.03em; margin-bottom:22px; display:flex; align-items:center; gap:8px; }
-  .eyebrow::before{ content:'//'; color:var(--blue-dim); }
+    /* ---------- HERO ---------- */
+    .hero { padding: 120px 0 100px; }
+    .eyebrow { font-family: var(--font-mono); font-size: 13px; color: var(--blue); margin-bottom: 24px; display: block; }
+    
+    h1 { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px; }
+    h1 span { color: var(--blue); }
 
-  .schema{
-    font-family:var(--font-mono); font-size:14.5px;
-    background:rgba(16,19,42,0.7); border:1px solid var(--border); border-left:3px solid var(--blue);
-    border-radius:6px; padding:26px 28px; overflow-x:auto; white-space:pre; color:var(--text-muted);
-    box-shadow: 0 0 40px rgba(92,156,255,0.06);
-  }
-  .schema .kw{ color:var(--cyan); }
-  .schema .tbl{ color:var(--text); }
-  .schema .field{ color:var(--violet); }
-  .schema .type{ color:var(--text-dim); }
-  .schema .val{ color:var(--blue); }
-  .cursor{ display:inline-block; width:8px; height:16px; background:var(--blue); margin-left:2px; vertical-align:-3px; animation:blink 1.05s steps(1) infinite; box-shadow:0 0 8px rgba(92,156,255,0.8); }
-  @keyframes blink{ 50%{ opacity:0; } }
+    .hero-tagline { font-size: 20px; color: var(--text-muted); max-width: 700px; margin-bottom: 40px; }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
 
-  .hero-tagline{ margin-top:30px; font-size:18.5px; color:var(--text); max-width:660px; }
-  .hero-tagline strong{ color:var(--blue); font-weight:600; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn { 
+      font-family: var(--font-mono); font-size: 14px; font-weight: 600;
+      padding: 14px 28px; border-radius: 8px; border: 1px solid var(--border); 
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary { background: var(--blue); color: #05070a; border-color: var(--blue); }
+    .btn-primary:hover { background: #79bcff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2); }
+    .btn-secondary { background: var(--surface-alt); color: var(--text); }
+    .btn-secondary:hover { border-color: var(--text-muted); background: #21262d; }
 
-  .hero-cta{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
-  .btn{ font-family:var(--font-mono); font-size:13px; padding:11px 20px; border-radius:6px; border:1px solid var(--border); transition:all .18s; }
-  .btn-primary{ background:var(--blue); color:var(--bg); border-color:var(--blue); font-weight:600; }
-  .btn-primary:hover{ background:#79ADFF; box-shadow:0 0 20px rgba(92,156,255,0.35); }
-  .btn-ghost{ color:var(--text-muted); }
-  .btn-ghost:hover{ color:var(--text); border-color:var(--text-muted); }
+    /* ---------- SECTIONS ---------- */
+    section { padding: 100px 0; border-top: 1px solid var(--border); }
+    .section-header { margin-bottom: 50px; }
+    .section-label { font-family: var(--font-mono); font-size: 13px; color: var(--violet); margin-bottom: 12px; display: block; }
+    h2 { font-size: 32px; font-weight: 700; }
 
-  section{ padding:70px 0; border-bottom:1px solid var(--border); }
-  section:last-of-type{ border-bottom:none; }
-  .filename{ font-family:var(--font-mono); font-size:12.5px; color:var(--text-dim); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
-  .filename .dot{ width:7px; height:7px; border-radius:50%; background:var(--blue-dim); }
-  h2{ font-family:var(--font-sans); font-size:27px; font-weight:600; color:var(--text); margin-bottom:28px; letter-spacing:-.01em; }
-  h2 .accent{ color:var(--blue); }
+    /* ---------- ABOUT ---------- */
+    .about-content { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
+    .about-text { font-size: 17px; color: var(--text-muted); }
+    .about-text p { margin-bottom: 20px; }
+    .about-text strong { color: var(--text); }
 
-  /* ---------- SOBRE ---------- */
-  .about-box{ background:rgba(16,19,42,0.55); border:1px solid var(--border); border-radius:8px; padding:30px 32px; font-size:15.5px; color:var(--text-muted); line-height:1.85; }
-  .about-box p{ margin-bottom:16px; }
-  .about-box p:last-child{ margin-bottom:0; }
-  .about-box strong{ color:var(--text); font-weight:600; }
+    .about-highlights { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 30px; }
+    .about-highlights h4 { font-family: var(--font-mono); font-size: 14px; color: var(--cyan); margin-bottom: 20px; text-transform: uppercase; }
+    .highlight-item { display: flex; gap: 12px; margin-bottom: 16px; font-size: 14px; }
+    .highlight-item i { color: var(--blue); margin-top: 4px; }
 
-  /* ---------- STACK ---------- */
-  .stack-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .stack-cat{ background:rgba(16,19,42,0.55); border:1px solid var(--border); border-radius:8px; padding:22px 24px; }
-  .stack-cat h4{ font-family:var(--font-mono); font-size:12px; color:var(--violet); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px; }
-  .badge-inline{ display:inline-block; padding:3px 10px; margin:3px 6px 3px 0; background:var(--surface-alt); border:1px solid var(--border); border-radius:4px; font-size:12.5px; color:var(--text); font-family:var(--font-mono); }
+    /* ---------- FEATURED PROJECT ---------- */
+    .featured-project {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px; 
+      padding: 48px; position: relative; overflow: hidden;
+    }
+    .featured-project::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--blue);
+    }
+    .fp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .fp-title { font-size: 28px; font-weight: 700; color: var(--text); }
+    .status-badge { 
+      font-family: var(--font-mono); font-size: 11px; padding: 4px 12px; 
+      border-radius: 20px; border: 1px solid var(--cyan); color: var(--cyan);
+    }
+    .fp-desc { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.8; }
+    
+    .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+    .fp-col h4 { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.1em; }
+    .fp-list { list-style: none; }
+    .fp-list li { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; padding-left: 18px; position: relative; }
+    .fp-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); }
+    
+    .fp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tech-tag { 
+      font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; 
+      background: var(--surface-alt); border: 1px solid var(--border); border-radius: 4px;
+    }
 
-  /* ---------- PROJETO EM DESTAQUE ---------- */
-  .featured-project{
-    background:rgba(16,19,42,0.6); border:1px solid var(--border); border-left:3px solid var(--blue);
-    border-radius:10px; padding:36px 38px;
-  }
-  .fp-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:10px; }
-  .fp-title{ font-family:var(--font-mono); font-size:20px; font-weight:600; color:var(--text); }
-  .fp-title a:hover{ color:var(--blue); }
-  .status-pill{ font-family:var(--font-mono); font-size:10.5px; color:var(--cyan); border:1px solid var(--cyan); border-radius:20px; padding:3px 11px; white-space:nowrap; }
-  .fp-lead{ color:var(--text-muted); font-size:15px; margin:16px 0 26px; line-height:1.75; }
-  .fp-block{ margin-bottom:24px; }
-  .fp-block:last-child{ margin-bottom:0; }
-  .fp-block h4{ font-family:var(--font-mono); font-size:12px; color:var(--cyan); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
-  .fp-block ul{ list-style:none; }
-  .fp-block li{ font-size:14px; color:var(--text-muted); padding-left:16px; position:relative; margin-bottom:7px; line-height:1.6; }
-  .fp-block li::before{ content:'▸'; position:absolute; left:0; color:var(--blue-dim); }
-  .fp-block li strong{ color:var(--text); font-weight:500; }
-  .fp-tech{ display:flex; flex-wrap:wrap; gap:8px; }
-  .fp-link{ display:inline-block; margin-top:8px; font-family:var(--font-mono); font-size:12.5px; color:var(--blue); }
-  .fp-link:hover{ text-decoration:underline; }
+    /* ---------- GRID LAYOUTS ---------- */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    
+    .card { 
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; 
+      padding: 30px; transition: all 0.2s; 
+    }
+    .card:hover { border-color: var(--blue-dim); transform: translateY(-4px); }
+    .card h3 { font-size: 18px; margin-bottom: 12px; }
+    .card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
 
-  /* ---------- ESTUDOS ---------- */
-  .study-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  .study-card{ background:rgba(16,19,42,0.4); border:1px solid var(--border); border-radius:8px; padding:18px 20px; transition:border-color .18s; }
-  .study-card:hover{ border-color:var(--blue-dim); }
-  .study-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-  .study-top h5{ font-family:var(--font-mono); font-size:13.5px; color:var(--text); font-weight:600; }
-  .study-top h5 a:hover{ color:var(--blue); }
-  .lang-badge{ font-family:var(--font-mono); font-size:10px; color:var(--bg); background:var(--violet); padding:2px 6px; border-radius:3px; white-space:nowrap; }
-  .study-card p{ font-size:12.5px; color:var(--text-dim); }
+    /* ---------- STACK ---------- */
+    .stack-group { margin-bottom: 32px; }
+    .stack-group h4 { font-family: var(--font-mono); font-size: 13px; color: var(--violet); margin-bottom: 16px; }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 10px; }
 
-  /* ---------- FORMAÇÃO ---------- */
-  .formacao{ background:rgba(16,19,42,0.55); border:1px solid var(--border); border-radius:8px; padding:26px 28px; display:flex; gap:20px; align-items:flex-start; }
-  .formacao .badge{ font-family:var(--font-mono); font-size:11px; color:var(--blue); border:1px solid var(--blue); border-radius:20px; padding:3px 10px; white-space:nowrap; }
-  .formacao h4{ font-size:16px; color:var(--text); font-weight:600; margin-bottom:6px; }
-  .formacao p{ font-size:13.5px; color:var(--text-muted); line-height:1.7; }
+    /* ---------- CONTACT ---------- */
+    .contact-box { 
+      background: linear-gradient(135deg, var(--surface) 0%, #0d1117 100%);
+      border: 1px solid var(--border); border-radius: 16px; padding: 60px; text-align: center;
+    }
+    .contact-box h2 { margin-bottom: 16px; }
+    .contact-box p { color: var(--text-muted); margin-bottom: 40px; font-size: 18px; }
 
-  /* ---------- CONTATO ---------- */
-  .terminal{ font-family:var(--font-mono); font-size:14px; background:rgba(16,19,42,0.55); border:1px solid var(--border); border-radius:8px; padding:26px 28px; }
-  .term-line{ margin-bottom:12px; color:var(--text-muted); }
-  .term-line:last-child{ margin-bottom:0; }
-  .term-line .prompt{ color:var(--cyan); }
-  .term-line .flag{ color:var(--violet); }
-  .term-line .real{ color:var(--blue); }
-  .term-line a.real:hover{ text-decoration:underline; }
+    /* ---------- FOOTER ---------- */
+    footer { padding: 60px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-family: var(--font-mono); font-size: 12px; text-align: center; }
 
-  footer{ padding:36px 0 50px; text-align:center; }
-  footer p{ font-family:var(--font-mono); font-size:12px; color:var(--text-dim); }
+    /* ---------- ANIMATIONS ---------- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  @media (max-width:640px){
-    .hero{ padding:64px 0 52px; }
-    .schema{ font-size:12px; padding:20px 16px; }
-    h2{ font-size:22px; }
-    .stack-grid, .study-grid{ grid-template-columns:1fr; }
-    .nav-links{ gap:14px; }
-    .hero-tagline{ font-size:16.5px; }
-    .featured-project{ padding:26px 22px; }
-    .formacao{ flex-direction:column; }
-  }
-</style>
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 850px) {
+      .about-content, .fp-grid, .grid-2 { grid-template-columns: 1fr; }
+      h1 { font-size: 40px; }
+      .featured-project { padding: 30px; }
+      .wrap { padding: 0 24px; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <div class="nav-brand">victor<span>@</span>portfolio<span>:~$</span></div>
-    <div class="nav-links">
-      <a href="#sobre">sobre</a>
-      <a href="#projeto">projeto</a>
-      <a href="#estudos">estudos</a>
-      <a href="#formacao">formação</a>
-      <a href="#stack">stack</a>
-      <a href="#contato">contato</a>
+  <nav>
+    <div class="wrap">
+      <div class="nav-brand">victor<span>.</span>teles<span>()</span></div>
+      <div class="nav-links">
+        <a href="#sobre">sobre</a>
+        <a href="#projetos">projetos</a>
+        <a href="#stack">stack</a>
+        <a href="#contato">contato</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">schema.sql</div>
-    <div class="schema"><span class="kw">CREATE TABLE</span> <span class="tbl">desenvolvedor</span> (
-  <span class="field">nome</span>          <span class="type">VARCHAR</span>   := <span class="val">'Victor Teles'</span>,
-  <span class="field">cargo</span>         <span class="type">VARCHAR</span>   := <span class="val">'Desenvolvedor Backend Python'</span>,
-  <span class="field">localizacao</span>   <span class="type">VARCHAR</span>   := <span class="val">'Aracaju, SE — Brasil'</span>,
-  <span class="field">foco</span>          <span class="type">TEXT[]</span>    := <span class="val">['APIs REST','Arquitetura de domínio','SOLID']</span>,
-  <span class="field">stack_atual</span>   <span class="type">TEXT[]</span>    := <span class="val">['Python','FastAPI','SQLAlchemy','PostgreSQL']</span>
-);<span class="cursor"></span></div>
-
-    <p class="hero-tagline">Construo software back-end em Python aplicando <strong>arquitetura de domínio limpa</strong> e boas práticas de engenharia — priorizando código testável, extensível e correto antes de rápido.</p>
-
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#projeto">Ver projeto em destaque</a>
-      <a class="btn btn-ghost" href="https://github.com/Victor4654" target="_blank" rel="noopener">GitHub ↗</a>
-      <a class="btn btn-ghost" href="#contato">LinkedIn</a>
-      <a class="btn btn-ghost" href="#contato">Contato</a>
+  <header class="hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Engenheiro de Software Backend</span>
+      <h1 class="reveal">Construindo sistemas <span>robustos</span> e arquiteturas escaláveis.</h1>
+      <p class="hero-tagline reveal">
+        Desenvolvedor focado em <strong>Python</strong> e <strong>Arquitetura de Domínio</strong>. 
+        Transformo requisitos complexos em código testável, limpo e de fácil manutenção.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+        <a href="https://github.com/Victor4654" target="_blank" class="btn btn-secondary">GitHub ↗</a>
+        <a href="#contato" class="btn btn-secondary">LinkedIn</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<section id="sobre">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>sobre.sql</div>
-    <h2>Sobre <span class="accent">mim</span></h2>
-    <div class="about-box">
-      <p>Desenvolvo software back-end em Python com foco em <strong>arquitetura de domínio</strong>, <strong>APIs REST</strong> e aplicação prática de princípios de engenharia de software (SOLID, Clean Architecture, Design Patterns).</p>
-      <p>Meu processo prioriza separação de responsabilidades, tipagem forte e decisões de design que tornam o sistema fácil de testar, manter e evoluir — antes de otimizar para velocidade de entrega.</p>
-      <p>Atualmente aprofundando conhecimento em bancos de dados e engenharia de dados, com formação complementar em Ciência da Computação em andamento.</p>
-    </div>
-  </div>
-</section>
-
-<section id="projeto">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>projeto-destaque.md</div>
-    <h2>Projeto em <span class="accent">destaque</span></h2>
-
-    <div class="featured-project">
-      <div class="fp-top">
-        <span class="fp-title"><a href="https://github.com/Victor4654/FinTrack" target="_blank" rel="noopener">FinTrack API</a></span>
-        <span class="status-pill">em desenvolvimento — domínio completo (110 testes)</span>
-      </div>
-      <p class="fp-lead">API REST para gestão de carteiras de investimento, com suporte a múltiplas classes de ativos — renda fixa, renda variável e criptomoedas — cada uma com regras de rentabilidade e indexadores próprios (CDI, IPCA, Selic, prefixado). Investidores com carteiras diversificadas precisam consolidar rentabilidades calculadas de formas distintas e acompanhar compra, venda e lucro/prejuízo de cada posição; o FinTrack resolve isso com uma camada de domínio que trata cada ativo de forma polimórfica, através de um contrato único de cálculo de retorno, e uma carteira que deriva seu estado inteiramente do histórico real de transações.</p>
-
-      <div class="fp-block">
-        <h4>Arquitetura</h4>
-        <ul>
-          <li>Separação estrita entre domínio (Python puro) e infraestrutura — <strong>domain/ nunca importa nada de framework ou banco</strong></li>
-          <li>Hierarquia polimórfica de ativos: <strong>Asset (ABC)</strong> → FixedIncome / VariableIncome → CDB, GovernmentBond, Stock, RealEstateFund, Cryptocurrency</li>
-          <li><strong>Portfolio / Position / Transaction</strong> — carteira que agrega posições por ticker, com preço médio e quantidade sempre derivados do histórico de transações, nunca armazenados diretamente</li>
-          <li>Contrato unificado <strong>ReturnContext / MarketRates</strong>, garantindo LSP em toda a hierarquia</li>
-        </ul>
-      </div>
-
-      <div class="fp-block">
-        <h4>Decisões de engenharia</h4>
-        <ul>
-          <li><strong>Strategy Pattern</strong> para desacoplar o cálculo de rentabilidade do indexador (cada um com fórmula própria)</li>
-          <li><strong>Factory/Registry</strong> resolve automaticamente a estratégia correta a partir do indexador, evitando combinações inválidas</li>
-          <li><strong>Template Method</strong> centraliza validação comum entre ativos de renda variável</li>
-          <li><strong>Protocol</strong> para contratos tipados sem acoplamento por herança — <code>PriceSource</code> é injetado por parâmetro, não por construtor, permitindo trocar a fonte de preço sem recriar a carteira</li>
-          <li>Posições indexadas por <strong>ticker</strong> (não pelo objeto <code>Asset</code>) para blindar contra bugs de identidade de objeto que ORMs podem introduzir</li>
-          <li><strong>Decimal</strong> em todo o domínio — <code>float</code> não é aceitável em cálculo financeiro</li>
-        </ul>
-      </div>
-
-      <div class="fp-block">
-        <h4>Testes</h4>
-        <ul>
-          <li>Domínio inteiro coberto por <strong>110 testes unitários</strong> com pytest, sem dependência de banco ou API externa</li>
-          <li>Inclui casos de regressão para bugs identificados durante o desenvolvimento — ex: estratégia de rentabilidade dessincronizada após troca de indexador, cálculo de preço médio corrompido por venda entre duas compras</li>
-        </ul>
-      </div>
-
-      <div class="fp-block">
-        <h4>Tecnologias</h4>
-        <div class="fp-tech">
-          <span class="badge-inline">Python 3.13</span><span class="badge-inline">FastAPI</span><span class="badge-inline">SQLAlchemy 2.0</span><span class="badge-inline">Pydantic v2</span><span class="badge-inline">PostgreSQL</span><span class="badge-inline">Alembic</span><span class="badge-inline">JWT</span><span class="badge-inline">Docker</span><span class="badge-inline">pytest</span>
+  <section id="sobre">
+    <div class="wrap">
+      <div class="about-content">
+        <div class="reveal">
+          <span class="section-label">01. Sobre mim</span>
+          <h2>Qualidade de código não é opcional.</h2>
+          <div class="about-text">
+            <p>Sou um desenvolvedor backend especializado em Python, com uma forte inclinação para a <strong>Engenharia de Software</strong> clássica aplicada ao desenvolvimento moderno.</p>
+            <p>Minha abordagem prioriza a <strong>Clean Architecture</strong> e os princípios <strong>SOLID</strong>, garantindo que a lógica de negócio (o domínio) permaneça isolada de detalhes técnicos como frameworks ou bancos de dados.</p>
+            <p>Atualmente, estou cursando <strong>Ciência da Computação</strong> na UNINTER, onde aprofundo meus conhecimentos teóricos em algoritmos e estruturas de dados para complementar minha experiência prática.</p>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="about-highlights">
+            <h4>Destaques Técnicos</h4>
+            <div class="highlight-item">
+              <i>▹</i>
+              <span>Foco em APIs REST de alta performance com FastAPI</span>
+            </div>
+            <div class="highlight-item">
+              <i>▹</i>
+              <span>Modelagem de dados complexos com SQLAlchemy 2.0</span>
+            </div>
+            <div class="highlight-item">
+              <i>▹</i>
+              <span>Cultura de testes rigorosa (TDD/Unitários com Pytest)</span>
+            </div>
+            <div class="highlight-item">
+              <i>▹</i>
+              <span>Ambientes conteinerizados com Docker</span>
+            </div>
+          </div>
         </div>
       </div>
-
-      <a class="fp-link" href="https://github.com/Victor4654/FinTrack" target="_blank" rel="noopener">→ github.com/Victor4654/FinTrack — README completo com exemplos e status por etapa</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="estudos">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>estudos-e-pratica.md</div>
-    <h2>Estudos e <span class="accent">prática</span></h2>
+  <section id="projetos">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="section-label">02. Portfólio</span>
+        <h2>Projeto em Destaque</h2>
+      </div>
 
-    <div class="study-grid">
-      <div class="study-card">
-        <div class="study-top">
-          <h5><a href="https://github.com/Victor4654/Alura" target="_blank" rel="noopener">Alura</a></h5>
-          <span class="lang-badge">Python</span>
+      <div class="featured-project reveal">
+        <div class="fp-header">
+          <div>
+            <h3 class="fp-title">FinTrack API</h3>
+            <div class="fp-tech">
+              <span class="tech-tag">Python 3.13</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Docker</span>
+            </div>
+          </div>
+          <span class="status-badge">110+ Testes Unitários</span>
         </div>
-        <p>Atividades da trilha de back-end Python.</p>
-      </div>
-      <div class="study-card">
-        <div class="study-top">
-          <h5><a href="https://github.com/Victor4654/Beecrowd" target="_blank" rel="noopener">Beecrowd</a></h5>
-          <span class="lang-badge">Python</span>
+        
+        <p class="fp-desc">
+          Uma API robusta para gestão de carteiras de investimento diversificadas. O sistema lida com o cálculo complexo de rentabilidade para diferentes classes de ativos (Renda Fixa, Variável, Cripto) usando indexadores dinâmicos (CDI, IPCA, Selic).
+        </p>
+
+        <div class="fp-grid">
+          <div class="fp-col">
+            <h4>Arquitetura & Design</h4>
+            <ul class="fp-list">
+              <li><strong>Domain-Driven:</strong> Lógica de negócio 100% isolada de frameworks.</li>
+              <li><strong>Design Patterns:</strong> Uso de Strategy e Factory para cálculos polimórficos.</li>
+              <li><strong>Imutabilidade:</strong> Estado da carteira derivado puramente de transações.</li>
+            </ul>
+          </div>
+          <div class="fp-col">
+            <h4>Engenharia</h4>
+            <ul class="fp-list">
+              <li><strong>Tipagem Forte:</strong> Uso extensivo de Pydantic v2 e Python Typing.</li>
+              <li><strong>Precisão:</strong> Cálculos financeiros utilizando o tipo Decimal.</li>
+              <li><strong>Extensibilidade:</strong> Contratos via Protocol para inversão de dependência.</li>
+            </ul>
+          </div>
         </div>
-        <p>Exercícios de programação competitiva.</p>
+
+        <a href="https://github.com/Victor4654/FinTrack" target="_blank" class="btn btn-secondary">Ver no GitHub ↗</a>
       </div>
-      <div class="study-card">
-        <div class="study-top">
-          <h5><a href="https://github.com/Victor4654/Projetos_pessoais_de_aprendizagem" target="_blank" rel="noopener">Projetos pessoais</a></h5>
-          <span class="lang-badge">TS / Py</span>
+
+      <div class="section-header reveal" style="margin-top: 60px; margin-bottom: 30px;">
+        <h3>Outras Atividades</h3>
+      </div>
+
+      <div class="grid-2">
+        <div class="card reveal">
+          <h3>Prática Competitiva</h3>
+          <p>Resolução de problemas complexos e otimização de algoritmos no Beecrowd.</p>
+          <a href="https://github.com/Victor4654/Beecrowd" target="_blank" class="tech-tag">Ver Repositório</a>
         </div>
-        <p>Projetos autorais do início da jornada — do Python básico a experimentos full-stack.</p>
-      </div>
-      <div class="study-card">
-        <div class="study-top">
-          <h5><a href="https://github.com/Victor4654/Livros" target="_blank" rel="noopener">Livros</a></h5>
-          <span class="lang-badge">Acervo</span>
+        <div class="card reveal">
+          <h3>Formação Contínua</h3>
+          <p>Trilhas avançadas de Python e boas práticas de desenvolvimento na Alura.</p>
+          <a href="https://github.com/Victor4654/Alura" target="_blank" class="tech-tag">Ver Repositório</a>
         </div>
-        <p>Repositório de apoio aos estudos — economia, matemática e engenharia de dados.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="formacao">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>formacao.json</div>
-    <h2>Formação</h2>
-    <div class="formacao">
-      <span class="badge">2026 — em andamento</span>
-      <div>
-        <h4>Bacharelado em Ciência da Computação — UNINTER</h4>
-        <p>Graduação EAD, estrutura curricular trimestral, com trilha eletiva voltada a Ciência de Dados e Big Data. Complementa o aprendizado prático em back-end com fundamentação teórica em algoritmos, estrutura de dados e ciência da computação.</p>
+  <section id="stack">
+    <div class="wrap">
+      <div class="section-header reveal">
+        <span class="section-label">03. Toolbox</span>
+        <h2>Stack Técnica</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="reveal">
+          <div class="stack-group">
+            <h4>Linguagens & Frameworks</h4>
+            <div class="stack-tags">
+              <span class="tech-tag">Python (Expert)</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Pydantic v2</span>
+              <span class="tech-tag">TypeScript (Básico)</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <h4>Persistência</h4>
+            <div class="stack-tags">
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">SQLAlchemy 2.0</span>
+              <span class="tech-tag">Alembic</span>
+              <span class="tech-tag">Redis</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="stack-group">
+            <h4>Engenharia & DevOps</h4>
+            <div class="stack-tags">
+              <span class="tech-tag">Clean Architecture</span>
+              <span class="tech-tag">SOLID</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Pytest</span>
+              <span class="tech-tag">Git / GitHub</span>
+              <span class="tech-tag">CI/CD Concepts</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <h4>Educação</h4>
+            <p style="font-size: 14px; color: var(--text-muted);">
+              <strong>Bacharelado em Ciência da Computação</strong><br>
+              UNINTER (2026) — Foco em Ciência de Dados e Big Data.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="stack">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>stack.yaml</div>
-    <h2>Stack <span class="accent">técnica</span></h2>
-    <div class="stack-grid">
-      <div class="stack-cat">
-        <h4>Backend</h4>
-        <span class="badge-inline">Python</span><span class="badge-inline">FastAPI</span><span class="badge-inline">Pydantic v2</span>
-      </div>
-      <div class="stack-cat">
-        <h4>Banco de dados</h4>
-        <span class="badge-inline">PostgreSQL</span><span class="badge-inline">SQLAlchemy 2.0</span><span class="badge-inline">Alembic</span><span class="badge-inline">psycopg v3</span>
-      </div>
-      <div class="stack-cat">
-        <h4>Ferramentas</h4>
-        <span class="badge-inline">Git</span><span class="badge-inline">Docker</span><span class="badge-inline">WSL2 / Linux</span><span class="badge-inline">Insomnia</span>
-      </div>
-      <div class="stack-cat">
-        <h4>Engenharia de software</h4>
-        <span class="badge-inline">Clean Architecture</span><span class="badge-inline">SOLID</span><span class="badge-inline">Design Patterns</span><span class="badge-inline">pytest</span>
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact-box reveal">
+        <h2>Vamos construir algo juntos?</h2>
+        <p>Estou aberto a oportunidades como Desenvolvedor Backend Python Junior/Pleno.</p>
+        <div class="hero-cta" style="justify-content: center;">
+          <a href="mailto:seu-email@exemplo.com" class="btn btn-primary">Enviar E-mail</a>
+          <a href="https://linkedin.com/in/seu-perfil" target="_blank" class="btn btn-secondary">LinkedIn</a>
+          <a href="https://github.com/Victor4654" target="_blank" class="btn btn-secondary">GitHub</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contato">
-  <div class="wrap reveal">
-    <div class="filename"><span class="dot"></span>contato.sh</div>
-    <h2>Vamos <span class="accent">conversar</span></h2>
-    <div class="terminal">
-      <div class="term-line"><span class="prompt">$</span> github <span class="flag">--open</span> <a class="real" href="https://github.com/Victor4654" target="_blank" rel="noopener">github.com/Victor4654</a></div>
-      <div class="term-line"><span class="prompt">$</span> linkedin <span class="flag">--set</span> "<span class="text-dim">// adicione seu perfil aqui</span>"</div>
-      <div class="term-line"><span class="prompt">$</span> email <span class="flag">--set</span> "<span class="text-dim">// adicione seu e-mail aqui</span>"</div>
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2024 Victor Teles — Desenvolvido com foco em Engenharia de Software.</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <p>victor teles · engenharia de software aplicada, projeto a projeto</p>
-</footer>
+  <script>
+    const observerOptions = {
+      threshold: 0.1
+    };
 
-<script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => io.observe(el));
-</script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
 
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>

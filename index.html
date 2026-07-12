@@ -114,7 +114,7 @@
   .fp-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:10px; }
   .fp-title{ font-family:var(--font-mono); font-size:20px; font-weight:600; color:var(--text); }
   .fp-title a:hover{ color:var(--blue); }
-  .status-pill{ font-family:var(--font-mono); font-size:10.5px; color:var(--violet); border:1px solid var(--violet); border-radius:20px; padding:3px 11px; white-space:nowrap; }
+  .status-pill{ font-family:var(--font-mono); font-size:10.5px; color:var(--cyan); border:1px solid var(--cyan); border-radius:20px; padding:3px 11px; white-space:nowrap; }
   .fp-lead{ color:var(--text-muted); font-size:15px; margin:16px 0 26px; line-height:1.75; }
   .fp-block{ margin-bottom:24px; }
   .fp-block:last-child{ margin-bottom:0; }
@@ -228,15 +228,16 @@
     <div class="featured-project">
       <div class="fp-top">
         <span class="fp-title"><a href="https://github.com/Victor4654/FinTrack" target="_blank" rel="noopener">FinTrack API</a></span>
-        <span class="status-pill">em desenvolvimento — Etapa 1 concluída</span>
+        <span class="status-pill">em desenvolvimento — domínio completo (110 testes)</span>
       </div>
-      <p class="fp-lead">API REST para gestão de carteiras de investimento, com suporte a múltiplas classes de ativos — renda fixa, renda variável e criptomoedas — cada uma com regras de rentabilidade e indexadores próprios (CDI, IPCA, Selic, prefixado). Investidores com carteiras diversificadas precisam consolidar rentabilidades calculadas de formas distintas; o FinTrack resolve isso com uma camada de domínio que trata cada ativo de forma polimórfica, através de um contrato único de cálculo de retorno.</p>
+      <p class="fp-lead">API REST para gestão de carteiras de investimento, com suporte a múltiplas classes de ativos — renda fixa, renda variável e criptomoedas — cada uma com regras de rentabilidade e indexadores próprios (CDI, IPCA, Selic, prefixado). Investidores com carteiras diversificadas precisam consolidar rentabilidades calculadas de formas distintas e acompanhar compra, venda e lucro/prejuízo de cada posição; o FinTrack resolve isso com uma camada de domínio que trata cada ativo de forma polimórfica, através de um contrato único de cálculo de retorno, e uma carteira que deriva seu estado inteiramente do histórico real de transações.</p>
 
       <div class="fp-block">
         <h4>Arquitetura</h4>
         <ul>
           <li>Separação estrita entre domínio (Python puro) e infraestrutura — <strong>domain/ nunca importa nada de framework ou banco</strong></li>
           <li>Hierarquia polimórfica de ativos: <strong>Asset (ABC)</strong> → FixedIncome / VariableIncome → CDB, GovernmentBond, Stock, RealEstateFund, Cryptocurrency</li>
+          <li><strong>Portfolio / Position / Transaction</strong> — carteira que agrega posições por ticker, com preço médio e quantidade sempre derivados do histórico de transações, nunca armazenados diretamente</li>
           <li>Contrato unificado <strong>ReturnContext / MarketRates</strong>, garantindo LSP em toda a hierarquia</li>
         </ul>
       </div>
@@ -247,8 +248,17 @@
           <li><strong>Strategy Pattern</strong> para desacoplar o cálculo de rentabilidade do indexador (cada um com fórmula própria)</li>
           <li><strong>Factory/Registry</strong> resolve automaticamente a estratégia correta a partir do indexador, evitando combinações inválidas</li>
           <li><strong>Template Method</strong> centraliza validação comum entre ativos de renda variável</li>
-          <li><strong>Protocol</strong> para contratos tipados sem acoplamento por herança</li>
+          <li><strong>Protocol</strong> para contratos tipados sem acoplamento por herança — <code>PriceSource</code> é injetado por parâmetro, não por construtor, permitindo trocar a fonte de preço sem recriar a carteira</li>
+          <li>Posições indexadas por <strong>ticker</strong> (não pelo objeto <code>Asset</code>) para blindar contra bugs de identidade de objeto que ORMs podem introduzir</li>
           <li><strong>Decimal</strong> em todo o domínio — <code>float</code> não é aceitável em cálculo financeiro</li>
+        </ul>
+      </div>
+
+      <div class="fp-block">
+        <h4>Testes</h4>
+        <ul>
+          <li>Domínio inteiro coberto por <strong>110 testes unitários</strong> com pytest, sem dependência de banco ou API externa</li>
+          <li>Inclui casos de regressão para bugs identificados durante o desenvolvimento — ex: estratégia de rentabilidade dessincronizada após troca de indexador, cálculo de preço médio corrompido por venda entre duas compras</li>
         </ul>
       </div>
 

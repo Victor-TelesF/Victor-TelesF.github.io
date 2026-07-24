@@ -19,6 +19,8 @@
       --blue-dim:      #1f6feb;
       --violet:        #bc8cff;
       --cyan:          #39c5bb;
+      --green:         #3fb950;
+      --orange:        #f0883e;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -59,7 +61,7 @@
     /* ---------- HERO ---------- */
     .hero { padding: 120px 0 100px; }
     .eyebrow { font-family: var(--font-mono); font-size: 13px; color: var(--blue); margin-bottom: 24px; display: block; }
-    
+
     h1 { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 24px; }
     h1 span { color: var(--blue); }
 
@@ -71,11 +73,14 @@
       font-family: var(--font-mono); font-size: 14px; font-weight: 600;
       padding: 14px 28px; border-radius: 8px; border: 1px solid var(--border); 
       display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
     }
     .btn-primary { background: var(--blue); color: #05070a; border-color: var(--blue); }
     .btn-primary:hover { background: #79bcff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2); }
     .btn-secondary { background: var(--surface-alt); color: var(--text); }
     .btn-secondary:hover { border-color: var(--text-muted); background: #21262d; }
+    .btn-green { background: var(--green); color: #05070a; border-color: var(--green); }
+    .btn-green:hover { background: #56d364; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(63, 185, 80, 0.2); }
 
     /* ---------- SECTIONS ---------- */
     section { padding: 100px 0; border-top: 1px solid var(--border); }
@@ -102,29 +107,43 @@
     .featured-project::before {
       content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--blue);
     }
-    .fp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .fp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
     .fp-title { font-size: 28px; font-weight: 700; color: var(--text); }
+    .fp-subtitle { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-top: 4px; }
     .status-badge { 
       font-family: var(--font-mono); font-size: 11px; padding: 4px 12px; 
-      border-radius: 20px; border: 1px solid var(--cyan); color: var(--cyan);
+      border-radius: 20px; border: 1px solid var(--orange); color: var(--orange);
+    }
+    .status-badge.ready {
+      border-color: var(--green); color: var(--green);
     }
     .fp-desc { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.8; }
-    
+
     .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 32px; }
     .fp-col h4 { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.1em; }
     .fp-list { list-style: none; }
     .fp-list li { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; padding-left: 18px; position: relative; }
     .fp-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); }
-    
+
     .fp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .tech-tag { 
       font-family: var(--font-mono); font-size: 12px; padding: 4px 10px; 
       background: var(--surface-alt); border: 1px solid var(--border); border-radius: 4px;
     }
 
+    .progress-bar {
+      width: 100%; height: 6px; background: var(--surface-alt); border-radius: 3px; margin-top: 8px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 3px;
+    }
+    .progress-label {
+      font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 6px;
+    }
+
     /* ---------- GRID LAYOUTS ---------- */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    
+
     .card { 
       background: var(--surface); border: 1px solid var(--border); border-radius: 12px; 
       padding: 30px; transition: all 0.2s; 
@@ -161,6 +180,7 @@
       .wrap { padding: 0 24px; }
     }
   </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -178,16 +198,17 @@
 
   <header class="hero">
     <div class="wrap">
-      <span class="eyebrow reveal">Engenheiro de Software Backend</span>
+      <span class="eyebrow reveal">Desenvolvedor Backend Python — Em Transição de Carreira</span>
       <h1 class="reveal">Construindo sistemas <span>robustos</span> e arquiteturas escaláveis.</h1>
       <p class="hero-tagline reveal">
-        Desenvolvedor focado em <strong>Python</strong> e <strong>Arquitetura de Domínio</strong>. 
+        Especialista em <strong>Python</strong> e <strong>Arquitetura de Domínio</strong>. 
         Transformo requisitos complexos em código testável, limpo e de fácil manutenção.
+        <strong>Atualmente cursando Ciência da Computação na UNINTER.</strong>
       </p>
       <div class="hero-cta reveal">
-        <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+        <a href="#projetos" class="btn btn-primary">Ver Projeto em Destaque</a>
         <a href="https://github.com/Victor-TelesF" target="_blank" class="btn btn-secondary">GitHub ↗</a>
-        <a href="#contato" class="btn btn-secondary">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/victor-teles-ferreira/" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
       </div>
     </div>
   </header>
@@ -199,10 +220,10 @@
           <span class="section-label">01. Sobre mim</span>
           <h2>Qualidade de código não é opcional.</h2>
           <div class="about-text">
-            <p>Sou um desenvolvedor backend especializado em Python, com uma forte inclinação para a <strong>Engenharia de Software</strong> clássica aplicada ao desenvolvimento moderno.</p>
-            <p>Trago uma maturidade construída ao longo de mais de cinco anos no mercado de trabalho, o que reflete diretamente na minha disciplina de estudos, visão de longo prazo e responsabilidade profissional.</p>
+            <p>Sou um desenvolvedor backend especializado em <strong>Python</strong>, com uma forte inclinação para a <strong>Engenharia de Software</strong> clássica aplicada ao desenvolvimento moderno.</p>
             <p>Minha abordagem prioriza a <strong>Clean Architecture</strong> e os princípios <strong>SOLID</strong>, garantindo que a lógica de negócio permaneça isolada de detalhes técnicos como frameworks ou bancos de dados.</p>
-            <p>Atualmente curso <strong>Ciência da Computação</strong> na UNINTER. Para extrair o máximo dessa formação e da engenharia de dados, consolidei uma forte base matemática e analítica de forma autodidata, garantindo o rigor lógico necessário para projetar arquiteturas complexas.</p>
+            <p>Para extrair o máximo da minha formação em <strong>Ciência da Computação</strong> (UNINTER) e da engenharia de dados, consolidei uma forte base matemática e analítica de forma autodidata, garantindo o rigor lógico necessário para projetar arquiteturas complexas.</p>
+            <p><strong>Busco oportunidades como Desenvolvedor Backend Python Júnior.</strong></p>
           </div>
         </div>
         <div class="reveal">
@@ -224,6 +245,10 @@
               <i>▹</i>
               <span>Ambientes conteinerizados com Docker</span>
             </div>
+            <div class="highlight-item">
+              <i>▹</i>
+              <span>Arquitetura Limpa e Domain-Driven Design (DDD)</span>
+            </div>
           </div>
         </div>
       </div>
@@ -241,40 +266,79 @@
         <div class="fp-header">
           <div>
             <h3 class="fp-title">FinTrack API</h3>
+            <p class="fp-subtitle">API REST para gestão de carteiras de investimento</p>
             <div class="fp-tech">
               <span class="tech-tag">Python 3.13</span>
               <span class="tech-tag">FastAPI</span>
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Clean Architecture</span>
             </div>
           </div>
-          <span class="status-badge">110+ Testes Unitários</span>
+          <span class="status-badge">Em Desenvolvimento</span>
         </div>
-        
+
         <p class="fp-desc">
           Uma API robusta para gestão de carteiras de investimento diversificadas. O sistema lida com o cálculo complexo de rentabilidade para diferentes classes de ativos (Renda Fixa, Variável, Cripto) usando indexadores dinâmicos (CDI, IPCA, Selic).
         </p>
+
+        <div style="margin-bottom: 32px;">
+          <h4 style="font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.1em;">Progresso do Projeto</h4>
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">Camada de Domínio (OOP + Testes)</span>
+              <span style="color: var(--green); font-family: var(--font-mono);">100%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">Persistência (SQLAlchemy + Alembic)</span>
+              <span style="color: var(--orange); font-family: var(--font-mono);">~60%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">Autenticação (JWT)</span>
+              <span style="color: var(--text-dim); font-family: var(--font-mono);">0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">API REST (Endpoints FastAPI)</span>
+              <span style="color: var(--text-dim); font-family: var(--font-mono);">0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
+          </div>
+        </div>
 
         <div class="fp-grid">
           <div class="fp-col">
             <h4>Arquitetura & Design</h4>
             <ul class="fp-list">
               <li><strong>Domain-Driven:</strong> Lógica de negócio 100% isolada de frameworks.</li>
-              <li><strong>Design Patterns:</strong> Uso de Strategy e Factory para cálculos polimórficos.</li>
+              <li><strong>Design Patterns:</strong> Strategy e Factory para cálculos polimórficos.</li>
               <li><strong>Imutabilidade:</strong> Estado da carteira derivado puramente de transações.</li>
+              <li><strong>Joined Table Inheritance:</strong> Hierarquia polimórfica mapeada para PostgreSQL.</li>
             </ul>
           </div>
           <div class="fp-col">
             <h4>Engenharia</h4>
             <ul class="fp-list">
-              <li><strong>Tipagem Forte:</strong> Uso extensivo de Pydantic v2 e Python Typing.</li>
-              <li><strong>Precisão:</strong> Cálculos financeiros utilizando o tipo Decimal.</li>
+              <li><strong>110+ Testes Unitários:</strong> Cobertura completa das regras de negócio.</li>
+              <li><strong>Tipagem Forte:</strong> Pydantic v2 e Python Typing em todo o projeto.</li>
+              <li><strong>Precisão:</strong> Cálculos financeiros com Decimal (sem erros de float).</li>
               <li><strong>Extensibilidade:</strong> Contratos via Protocol para inversão de dependência.</li>
             </ul>
           </div>
         </div>
 
-        <a href="https://github.com/Victor-TelesF/FinTrack" target="_blank" class="btn btn-secondary">Ver no GitHub ↗</a>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://github.com/Victor-TelesF/FinTrack" target="_blank" class="btn btn-primary">Ver Código no GitHub ↗</a>
+          <a href="#" class="btn btn-secondary" style="opacity: 0.5; cursor: not-allowed;">🚀 Live Demo (em breve)</a>
+        </div>
       </div>
 
       <div class="section-header reveal" style="margin-top: 60px; margin-bottom: 30px;">
@@ -284,13 +348,13 @@
       <div class="grid-2">
         <div class="card reveal">
           <h3>Prática Competitiva</h3>
-          <p>Resolução de problemas complexos e otimização de algoritmos no Beecrowd.</p>
-          <a href="https://github.com/Victor-TelesF/Beecrowd" target="_blank" class="tech-tag">Ver Repositório</a>
+          <p>Resolução de problemas complexos e otimização de algoritmos no Beecrowd — fortalecendo raciocínio lógico e estruturas de dados.</p>
+          <a href="https://github.com/Victor-TelesF/Beecrowd" target="_blank" class="tech-tag">Ver Repositório ↗</a>
         </div>
         <div class="card reveal">
           <h3>Formação Contínua</h3>
-          <p>Trilhas avançadas de Python e boas práticas de desenvolvimento na Alura.</p>
-          <a href="https://github.com/Victor-TelesF/Alura" target="_blank" class="tech-tag">Ver Repositório</a>
+          <p>Trilhas avançadas de Python, boas práticas e arquitetura de software na Alura.</p>
+          <a href="https://github.com/Victor-TelesF/Alura" target="_blank" class="tech-tag">Ver Repositório ↗</a>
         </div>
       </div>
     </div>
@@ -308,7 +372,7 @@
           <div class="stack-group">
             <h4>Linguagens & Frameworks</h4>
             <div class="stack-tags">
-              <span class="tech-tag">Python (Expert)</span>
+              <span class="tech-tag">Python (Avançado)</span>
               <span class="tech-tag">FastAPI</span>
               <span class="tech-tag">Pydantic v2</span>
               <span class="tech-tag">TypeScript (Básico)</span>
@@ -329,18 +393,19 @@
             <h4>Engenharia & DevOps</h4>
             <div class="stack-tags">
               <span class="tech-tag">Clean Architecture</span>
-              <span class="tech-tag">SOLID</span>
+              <span class="tech-tag">SOLID / DDD</span>
               <span class="tech-tag">Docker</span>
               <span class="tech-tag">Pytest</span>
               <span class="tech-tag">Git / GitHub</span>
-              <span class="tech-tag">CI/CD Concepts</span>
+              <span class="tech-tag">CI/CD (Conceitos)</span>
             </div>
           </div>
           <div class="stack-group">
             <h4>Educação</h4>
             <p style="font-size: 14px; color: var(--text-muted);">
               <strong>Bacharelado em Ciência da Computação</strong><br>
-              UNINTER (2026) — Foco em Ciência de Dados e Big Data.
+              UNINTER (Previsão: 2026)<br>
+              Foco em Ciência de Dados e Big Data.
             </p>
           </div>
         </div>
@@ -352,11 +417,11 @@
     <div class="wrap">
       <div class="contact-box reveal">
         <h2>Vamos construir algo juntos?</h2>
-        <p>Estou aberto a oportunidades como Desenvolvedor Backend Python Junior/Pleno.</p>
+        <p>Estou aberto a oportunidades como <strong>Desenvolvedor Backend Python Júnior</strong>.<br>Disponível para trabalho remoto ou híbrido.</p>
         <div class="hero-cta" style="justify-content: center;">
           <a href="mailto:victortf986@gmail.com" class="btn btn-primary">Enviar E-mail</a>
-          <a href="https://linkedin.com/in/seu-perfil" target="_blank" class="btn btn-secondary">LinkedIn</a>
-          <a href="https://github.com/Victor-TelesF" target="_blank" class="btn btn-secondary">GitHub</a>
+          <a href="https://www.linkedin.com/in/victor-teles-ferreira/" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
+          <a href="https://github.com/Victor-TelesF" target="_blank" class="btn btn-secondary">GitHub ↗</a>
         </div>
       </div>
     </div>

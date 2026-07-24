@@ -21,6 +21,7 @@
       --cyan:          #39c5bb;
       --green:         #3fb950;
       --orange:        #f0883e;
+      --red:           #f85149;
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -81,6 +82,8 @@
     .btn-secondary:hover { border-color: var(--text-muted); background: #21262d; }
     .btn-green { background: var(--green); color: #05070a; border-color: var(--green); }
     .btn-green:hover { background: #56d364; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(63, 185, 80, 0.2); }
+    .btn-outline { background: transparent; color: var(--text-muted); border-color: var(--border); }
+    .btn-outline:hover { border-color: var(--violet); color: var(--violet); }
 
     /* ---------- SECTIONS ---------- */
     section { padding: 100px 0; border-top: 1px solid var(--border); }
@@ -102,10 +105,13 @@
     /* ---------- FEATURED PROJECT ---------- */
     .featured-project {
       background: var(--surface); border: 1px solid var(--border); border-radius: 16px; 
-      padding: 48px; position: relative; overflow: hidden;
+      padding: 48px; position: relative; overflow: hidden; margin-bottom: 32px;
     }
     .featured-project::before {
       content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--blue);
+    }
+    .featured-project.cosmic::before {
+      background: var(--violet);
     }
     .fp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
     .fp-title { font-size: 28px; font-weight: 700; color: var(--text); }
@@ -117,6 +123,9 @@
     .status-badge.ready {
       border-color: var(--green); color: var(--green);
     }
+    .status-badge.planned {
+      border-color: var(--violet); color: var(--violet);
+    }
     .fp-desc { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.8; }
 
     .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 32px; }
@@ -124,6 +133,7 @@
     .fp-list { list-style: none; }
     .fp-list li { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; padding-left: 18px; position: relative; }
     .fp-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); }
+    .cosmic .fp-list li::before { color: var(--violet); }
 
     .fp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .tech-tag { 
@@ -136,6 +146,9 @@
     }
     .progress-fill {
       height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 3px;
+    }
+    .progress-fill.cosmic {
+      background: linear-gradient(90deg, var(--violet), var(--blue));
     }
     .progress-label {
       font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 6px;
@@ -206,7 +219,7 @@
         <strong>Atualmente cursando Ciência da Computação na UNINTER.</strong>
       </p>
       <div class="hero-cta reveal">
-        <a href="#projetos" class="btn btn-primary">Ver Projeto em Destaque</a>
+        <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
         <a href="https://github.com/Victor-TelesF" target="_blank" class="btn btn-secondary">GitHub ↗</a>
         <a href="https://www.linkedin.com/in/victor-teles-ferreira/" target="_blank" class="btn btn-secondary">LinkedIn ↗</a>
       </div>
@@ -259,9 +272,10 @@
     <div class="wrap">
       <div class="section-header reveal">
         <span class="section-label">02. Portfólio</span>
-        <h2>Projeto em Destaque</h2>
+        <h2>Projetos</h2>
       </div>
 
+      <!-- PROJETO 1: FinTrack -->
       <div class="featured-project reveal">
         <div class="fp-header">
           <div>
@@ -341,22 +355,73 @@
         </div>
       </div>
 
-      <div class="section-header reveal" style="margin-top: 60px; margin-bottom: 30px;">
-        <h3>Outras Atividades</h3>
+      <!-- PROJETO 2: Cosmic Sandbox -->
+      <div class="featured-project cosmic reveal">
+        <div class="fp-header">
+          <div>
+            <h3 class="fp-title">🪐 Cosmic Sandbox</h3>
+            <p class="fp-subtitle">Simulação gravitacional N-corpos com arquitetura extensível</p>
+            <div class="fp-tech">
+              <span class="tech-tag">Python 3.14</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Matplotlib</span>
+              <span class="tech-tag">Pyodide</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Kafka</span>
+              <span class="tech-tag">TimescaleDB</span>
+            </div>
+          </div>
+          <span class="status-badge planned">Planejado / Em Breve</span>
+        </div>
+
+        <p class="fp-desc">
+          Sandbox cósmico interativo onde é possível simular sistemas solares completos, lançar corpos celestes e observar a física em ação. O projeto integra <strong>cálculo numérico</strong>, <strong>álgebra linear vetorizada</strong> e <strong>física de simulação</strong> em uma arquitetura projetada para escalar de dezenas a milhares de corpos sem reescrita.
+        </p>
+
+        <div class="fp-grid">
+          <div class="fp-col">
+            <h4>Física & Matemática</h4>
+            <ul class="fp-list">
+              <li><strong>Integradores numéricos:</strong> Euler → Verlet/Leapfrog com validação de conservação de energia.</li>
+              <li><strong>Força gravitacional:</strong> Cálculo vetorizado em NumPy, O(n²) otimizado.</li>
+              <li><strong>Colisões:</strong> Conservação de momento e massa (base da "troca equivalente").</li>
+              <li><strong>Escala futura:</strong> Barnes-Hut (O(n log n)) e GPU (CuPy) para milhares de corpos.</li>
+            </ul>
+          </div>
+          <div class="fp-col">
+            <h4>Arquitetura & Infra</h4>
+            <ul class="fp-list">
+              <li><strong>Strategy Pattern:</strong> Integradores intercambiáveis sem refatoração.</li>
+              <li><strong>Renderer desacoplado:</strong> Matplotlib → Canvas/Pyodide (WASM no navegador).</li>
+              <li><strong>Pipeline de eventos:</strong> Kafka + TimescaleDB para séries temporais (Etapa 4.5).</li>
+              <li><strong>Monorepo multi-serviço:</strong> Docker Compose orquestrando simulação + infra.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="#" class="btn btn-outline" style="opacity: 0.6; cursor: not-allowed;">Repositório (em breve)</a>
+        </div>
+
+        <div style="margin-top: 32px; padding: 20px; background: rgba(188, 140, 255, 0.05); border: 1px solid rgba(188, 140, 255, 0.2); border-radius: 8px;">
+          <h4 style="font-family: var(--font-mono); font-size: 12px; color: var(--violet); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.1em;">Roteiro de Etapas</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="font-size: 13px; color: var(--text-muted);">
+              <span style="color: var(--green);">✓</span> Etapa 1: Sistema Solar Simples (2-3 corpos)<br>
+              <span style="color: var(--green);">✓</span> Etapa 2: Sistema Solar Completo<br>
+              <span style="color: var(--orange);">~</span> Etapa 2.5: Ciência de Dados (análise orbital)<br>
+              <span style="color: var(--text-dim);">○</span> Etapa 3: Verlet/Leapfrog
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">
+              <span style="color: var(--text-dim);">○</span> Etapa 3.5: PINN (ML para órbitas)<br>
+              <span style="color: var(--text-dim);">○</span> Etapa 4: Colisões & Conservação<br>
+              <span style="color: var(--text-dim);">○</span> Etapa 4.5: Pipeline Kafka + TimescaleDB<br>
+              <span style="color: var(--text-dim);">○</span> Etapa 9: Distribuição Pyodide + Canvas
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card reveal">
-          <h3>Prática Competitiva</h3>
-          <p>Resolução de problemas complexos e otimização de algoritmos no Beecrowd — fortalecendo raciocínio lógico e estruturas de dados.</p>
-          <a href="https://github.com/Victor-TelesF/Beecrowd" target="_blank" class="tech-tag">Ver Repositório ↗</a>
-        </div>
-        <div class="card reveal">
-          <h3>Formação Contínua</h3>
-          <p>Trilhas avançadas de Python, boas práticas e arquitetura de software na Alura.</p>
-          <a href="https://github.com/Victor-TelesF/Alura" target="_blank" class="tech-tag">Ver Repositório ↗</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -375,6 +440,7 @@
               <span class="tech-tag">Python (Avançado)</span>
               <span class="tech-tag">FastAPI</span>
               <span class="tech-tag">Pydantic v2</span>
+              <span class="tech-tag">NumPy</span>
               <span class="tech-tag">TypeScript (Básico)</span>
             </div>
           </div>
@@ -384,6 +450,7 @@
               <span class="tech-tag">PostgreSQL</span>
               <span class="tech-tag">SQLAlchemy 2.0</span>
               <span class="tech-tag">Alembic</span>
+              <span class="tech-tag">TimescaleDB</span>
               <span class="tech-tag">Redis</span>
             </div>
           </div>
@@ -395,9 +462,19 @@
               <span class="tech-tag">Clean Architecture</span>
               <span class="tech-tag">SOLID / DDD</span>
               <span class="tech-tag">Docker</span>
+              <span class="tech-tag">Kafka</span>
               <span class="tech-tag">Pytest</span>
               <span class="tech-tag">Git / GitHub</span>
               <span class="tech-tag">CI/CD (Conceitos)</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <h4>Machine Learning & Dados</h4>
+            <div class="stack-tags">
+              <span class="tech-tag">PyTorch (Básico)</span>
+              <span class="tech-tag">PINNs</span>
+              <span class="tech-tag">Análise Exploratória</span>
+              <span class="tech-tag">Estatística</span>
             </div>
           </div>
           <div class="stack-group">

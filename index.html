@@ -110,9 +110,6 @@
     .featured-project::before {
       content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--blue);
     }
-    .featured-project.cosmic::before {
-      background: var(--violet);
-    }
     .fp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
     .fp-title { font-size: 28px; font-weight: 700; color: var(--text); }
     .fp-subtitle { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-top: 4px; }
@@ -133,7 +130,6 @@
     .fp-list { list-style: none; }
     .fp-list li { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; padding-left: 18px; position: relative; }
     .fp-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); }
-    .cosmic .fp-list li::before { color: var(--violet); }
 
     .fp-tech { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .tech-tag { 
@@ -146,9 +142,6 @@
     }
     .progress-fill {
       height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); border-radius: 3px;
-    }
-    .progress-fill.cosmic {
-      background: linear-gradient(90deg, var(--violet), var(--blue));
     }
     .progress-label {
       font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); margin-top: 6px;
@@ -293,7 +286,7 @@
         </div>
 
         <p class="fp-desc">
-          Uma API robusta para gestão de carteiras de investimento diversificadas. O sistema lida com o cálculo complexo de rentabilidade para diferentes classes de ativos (Renda Fixa, Variável, Cripto) usando indexadores dinâmicos (CDI, IPCA, Selic).
+          Uma API robusta para gestão de carteiras de investimento diversificadas. O sistema lida com o cálculo complexo de rentabilidade para diferentes classes de ativos (Renda Fixa, Variável, Cripto) usando indexadores dinâmicos (CDI, IPCA, Selic), com validação Pydantic e tratamento de erros de domínio já integrados à camada de API.
         </p>
 
         <div style="margin-bottom: 32px;">
@@ -308,6 +301,13 @@
           <div style="margin-bottom: 16px;">
             <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
               <span style="color: var(--text-muted);">Persistência (SQLAlchemy + Alembic)</span>
+              <span style="color: var(--green); font-family: var(--font-mono);">100%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">Schemas (Pydantic v2) & Tratamento de Erros</span>
               <span style="color: var(--green); font-family: var(--font-mono);">100%</span>
             </div>
             <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
@@ -336,15 +336,17 @@
               <li><strong>Design Patterns:</strong> Strategy e Factory para cálculos polimórficos.</li>
               <li><strong>Imutabilidade:</strong> Estado da carteira derivado puramente de transações.</li>
               <li><strong>Joined Table Inheritance:</strong> Hierarquia polimórfica mapeada para PostgreSQL.</li>
+              <li><strong>Separação de Camadas:</strong> schemas validam forma, domínio aplica regras de negócio, error handlers traduzem exceções em respostas HTTP.</li>
             </ul>
           </div>
           <div class="fp-col">
             <h4>Engenharia</h4>
             <ul class="fp-list">
               <li><strong>110+ Testes Unitários:</strong> Cobertura completa das regras de negócio.</li>
-              <li><strong>Tipagem Forte:</strong> Pydantic v2 e Python Typing em todo o projeto.</li>
+              <li><strong>Tipagem Forte:</strong> Pydantic v2 (discriminated unions) e Python Typing em todo o projeto.</li>
               <li><strong>Precisão:</strong> Cálculos financeiros com Decimal (sem erros de float).</li>
               <li><strong>Extensibilidade:</strong> Contratos via Protocol para inversão de dependência.</li>
+              <li><strong>Erros centralizados:</strong> exceções de domínio mapeadas para status HTTP (404, 409, 422, 400).</li>
             </ul>
           </div>
         </div>
@@ -355,72 +357,9 @@
         </div>
       </div>
 
-      <!-- PROJETO 2: Cosmic Sandbox -->
-      <div class="featured-project cosmic reveal">
-        <div class="fp-header">
-          <div>
-            <h3 class="fp-title">🪐 Cosmic Sandbox</h3>
-            <p class="fp-subtitle">Simulação gravitacional N-corpos com arquitetura extensível</p>
-            <div class="fp-tech">
-              <span class="tech-tag">Python 3.14</span>
-              <span class="tech-tag">NumPy</span>
-              <span class="tech-tag">Matplotlib</span>
-              <span class="tech-tag">Pyodide</span>
-              <span class="tech-tag">Docker</span>
-              <span class="tech-tag">Kafka</span>
-              <span class="tech-tag">TimescaleDB</span>
-            </div>
-          </div>
-          <span class="status-badge planned">Planejado / Em Breve</span>
-        </div>
-
-        <p class="fp-desc">
-          Sandbox cósmico interativo onde é possível simular sistemas solares completos, lançar corpos celestes e observar a física em ação. O projeto integra <strong>cálculo numérico</strong>, <strong>álgebra linear vetorizada</strong> e <strong>física de simulação</strong> em uma arquitetura projetada para escalar de dezenas a milhares de corpos sem reescrita.
-        </p>
-
-        <div class="fp-grid">
-          <div class="fp-col">
-            <h4>Física & Matemática</h4>
-            <ul class="fp-list">
-              <li><strong>Integradores numéricos:</strong> Euler → Verlet/Leapfrog com validação de conservação de energia.</li>
-              <li><strong>Força gravitacional:</strong> Cálculo vetorizado em NumPy, O(n²) otimizado.</li>
-              <li><strong>Colisões:</strong> Conservação de momento e massa (base da "troca equivalente").</li>
-              <li><strong>Escala futura:</strong> Barnes-Hut (O(n log n)) e GPU (CuPy) para milhares de corpos.</li>
-            </ul>
-          </div>
-          <div class="fp-col">
-            <h4>Arquitetura & Infra</h4>
-            <ul class="fp-list">
-              <li><strong>Strategy Pattern:</strong> Integradores intercambiáveis sem refatoração.</li>
-              <li><strong>Renderer desacoplado:</strong> Matplotlib → Canvas/Pyodide (WASM no navegador).</li>
-              <li><strong>Pipeline de eventos:</strong> Kafka + TimescaleDB para séries temporais (Etapa 4.5).</li>
-              <li><strong>Monorepo multi-serviço:</strong> Docker Compose orquestrando simulação + infra.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="#" class="btn btn-outline" style="opacity: 0.6; cursor: not-allowed;">Repositório (em breve)</a>
-        </div>
-
-        <div style="margin-top: 32px; padding: 20px; background: rgba(188, 140, 255, 0.05); border: 1px solid rgba(188, 140, 255, 0.2); border-radius: 8px;">
-          <h4 style="font-family: var(--font-mono); font-size: 12px; color: var(--violet); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.1em;">Roteiro de Etapas</h4>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div style="font-size: 13px; color: var(--text-muted);">
-              <span style="color: var(--green);">✓</span> Etapa 1: Sistema Solar Simples (2-3 corpos)<br>
-              <span style="color: var(--green);">✓</span> Etapa 2: Sistema Solar Completo<br>
-              <span style="color: var(--orange);">~</span> Etapa 2.5: Ciência de Dados (análise orbital)<br>
-              <span style="color: var(--text-dim);">○</span> Etapa 3: Verlet/Leapfrog
-            </div>
-            <div style="font-size: 13px; color: var(--text-muted);">
-              <span style="color: var(--text-dim);">○</span> Etapa 3.5: PINN (ML para órbitas)<br>
-              <span style="color: var(--text-dim);">○</span> Etapa 4: Colisões & Conservação<br>
-              <span style="color: var(--text-dim);">○</span> Etapa 4.5: Pipeline Kafka + TimescaleDB<br>
-              <span style="color: var(--text-dim);">○</span> Etapa 9: Distribuição Pyodide + Canvas
-            </div>
-          </div>
-        </div>
-      </div>
+      <p class="reveal" style="font-family: var(--font-mono); font-size: 13px; color: var(--text-dim); margin-top: 8px;">
+        💡 Ideia futura, ainda sem data de início: uma simulação gravitacional N-corpos (Cosmic Sandbox).
+      </p>
 
     </div>
   </section>
